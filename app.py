@@ -27,7 +27,7 @@ def processing():
                 if found_job.result == 'error':
                     return render_template('error.html')
                 else:
-                    create_results_html(detections=found_job.result)
+                    # create_results_html(detections=found_job.result)
                     return render_template('results.html')
     return render_template('process.html')
 
