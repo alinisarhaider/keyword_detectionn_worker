@@ -8,6 +8,7 @@ from design_html import create_results_html, create_process_html
 
 app = Flask(__name__)
 q = Queue(connection=conn)
+print(q.count)
 
 
 @app.route('/')
