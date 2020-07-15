@@ -16,7 +16,7 @@ def create_process_html(job_id):
     html_file.close()
 
 
-def create_output_html(detections: dict):
+def create_results_html(detections: dict):
     html_file = open('templates/results.html', 'w')
     data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("

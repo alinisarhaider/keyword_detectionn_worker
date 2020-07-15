@@ -3,7 +3,7 @@ from background_worker import keyword_detection_processing
 import os
 from rq import Queue
 from worker import conn
-from design_html import create_output_html, create_process_html
+from design_html import create_results_html, create_process_html
 
 
 app = Flask(__name__)
@@ -13,6 +13,16 @@ q = Queue(connection=conn)
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
+@app.route('/detect', methods=['POST'])
+def detect():
+    form_values = [x for x in request.form.values()]
+    url, keywords = form_values[0], form_values[1].split(',')
+    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=60)
+    create_process_html(job_id=job.id)
+
+    return render_template('wait.html', job_id=job.id)
 
 
 @app.route('/processing/')
@@ -26,19 +36,9 @@ def processing():
                 if found_job.result == 'error':
                     return render_template('error.html')
                 else:
-                    create_output_html(detections=found_job.result)
+                    create_results_html(detections=found_job.result)
                     return render_template('results.html')
-    return render_template('output.html')
-
-
-@app.route('/detect', methods=['POST'])
-def detect():
-    form_values = [x for x in request.form.values()]
-    url, keywords = form_values[0], form_values[1].split(',')
-    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=60)
-    create_process_html(job_id=job.id)
-
-    return render_template('wait.html', job_id=job.id)
+    return render_template('results.html')
 
 
 if __name__ == '__main__':
