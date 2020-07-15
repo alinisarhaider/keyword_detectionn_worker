@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, request, url_for, redirect, render_template, jsonify
 from design_html import create_wait_html
 from background_worker import keyword_detection_processing
 import os
@@ -17,6 +17,15 @@ def home():
 
 @app.route('/processing')
 def processing():
+    query_id = request.args.get('job_id')
+    if query_id:
+        found_job = q.fetch_job(query_id)
+        if found_job:
+            status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
+            if status == 'completed':
+                return render_template('results.html')
+        else:
+            print('No job found!')
     return render_template('output.html')
 
 
@@ -24,10 +33,10 @@ def processing():
 def detect():
     form_values = [x for x in request.form.values()]
     url, keywords = form_values[0], form_values[1].split(',')
-    q.enqueue(keyword_detection_processing, url, keywords, result_ttl=60)
+    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=60)
     create_wait_html()
 
-    return render_template('wait.html')
+    return render_template('wait.html', job_id=job.id)
 
 
 if __name__ == '__main__':
