@@ -4,7 +4,7 @@ import math
 
 def create_wait_html():
     html_file = open('templates/output.html', 'w')
-    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><meta http-equiv='cache-control' content='no-cache'><meta http-equiv='pragma' content='no-cache'><meta http-equiv='expires' content='0'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
+    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><meta http-equiv='cache-control' content='no-cache, no-store, must-revalidate'><meta http-equiv='pragma' content='no-cache'><meta http-equiv='expires' content='0'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
