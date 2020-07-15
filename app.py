@@ -1,9 +1,9 @@
-from flask import Flask, request, url_for, redirect, render_template, jsonify
-from design_html import create_wait_html
+from flask import Flask, request, url_for, redirect, render_template
 from background_worker import keyword_detection_processing
 import os
 from rq import Queue
 from worker import conn
+from design_html import create_output_html, create_process_html
 
 
 app = Flask(__name__)
@@ -17,19 +17,17 @@ def home():
 
 @app.route('/processing/')
 def processing():
-    print('I am here 1')
     query_id = request.args.get('job')
-    print(query_id)
     if query_id:
         found_job = q.fetch_job(query_id)
-        print('I am here 2')
-        print(query_id, '\n', found_job.result)
         if found_job:
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
             if status == 'completed':
-                return render_template('results.html')
-        else:
-            print('No job found!')
+                if found_job.result == 'error':
+                    return render_template('error.html')
+                else:
+                    create_output_html(detections=found_job.result)
+                    return render_template('results.html')
     return render_template('output.html')
 
 
@@ -38,7 +36,7 @@ def detect():
     form_values = [x for x in request.form.values()]
     url, keywords = form_values[0], form_values[1].split(',')
     job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=60)
-    create_wait_html()
+    create_process_html(job_id=job.id)
 
     return render_template('wait.html', job_id=job.id)
 

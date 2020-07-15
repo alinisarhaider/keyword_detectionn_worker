@@ -2,37 +2,22 @@ from datetime import datetime, timedelta
 import math
 
 
-def create_wait_html():
-    html_file = open('templates/output.html', 'w')
-    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><meta http-equiv='cache-control' content='no-cache, no-store, must-revalidate'><meta http-equiv='pragma' content='no-cache'><meta http-equiv='expires' content='0'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
+def create_process_html(job_id):
+    html_file = open('templates/process.html', 'w')
+    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
-    data += "<meta http-equiv='refresh' content='30; url = {{ url_for("
-    data += '"processing")}}'
-    data += "'>"
+    data += "<meta http-equiv='refresh' content='30; url = https://ytkd42.herokuapp.com/processing/?job="
+    data += str(job_id)+">"
     data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
 
     html_file.write(data)
     html_file.close()
 
 
-def create_error_html():
-    html_file = open('templates/output.html', 'w')
-    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
-    data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
-    data += '"static", filename="./style.css") }}'
-    data += "'>"
-    data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>This video is restricted by YouTube. Kindly try some other video.</text><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
-    data += '"home")}}'
-    data += "'>Home</a></div></body></html>"
-
-    html_file.write(data)
-    html_file.close()
-
-
 def create_output_html(detections: dict):
-    html_file = open('templates/output.html', 'w')
+    html_file = open('templates/results.html', 'w')
     data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
