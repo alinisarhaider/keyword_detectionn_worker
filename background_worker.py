@@ -11,4 +11,5 @@ def keyword_detection_processing(url, keywords):
     response, time_offset = transcribe_audio(audio_data=audio_segment_buffer, language='en-US')
     transcription, timestamps_list = get_transcriptions(response_list=response, time_offset_list=time_offset)
     detections = get_detections(keywords=keywords, transcription=transcription, timestamps_list=timestamps_list)
+    print(detections)
     return detections
