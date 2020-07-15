@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Detect Keywords</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='./style.css') }}">
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Detect Keywords</h1>
+
+     <!-- Form to enter URL and keywords for detection  -->
+    <form action="{{ url_for('detect')}}" method="POST">
+        <input type="url" name="url" placeholder="Enter Youtube URL e.g. https://www.youtube.com/watch?v=FyjqeyyFCKI"
+             required="required" /><br>
+    	<input type="text" name="keywords" placeholder="Enter Keyword (or comma separated keywords) or a phrase" required="required" /><br>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Detect</button>
+    </form>
+
+   <br>
+   <br>
+     <text style="font-size:11px">Note: This server does not support long file processing. Kindly use short length (under 90 seconds) videos.</text>
+
+ </div>
+ {{display}}
+ <br>
+ <br>
+ {{example}}
+
+</body>
+</html>
