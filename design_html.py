@@ -8,7 +8,7 @@ def create_wait_html():
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
-    data += "<meta http-equiv='refresh' content='30'></head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your transaction is being processed...</text></div></body></html>"
+    data += "<meta http-equiv='refresh' content='30'></head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
 
     html_file.write(data)
     html_file.close()

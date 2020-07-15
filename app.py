@@ -15,6 +15,11 @@ def home():
     return render_template('home.html')
 
 
+@app.route('/processing')
+def processing():
+    return render_template('output.html')
+
+
 @app.route('/detect', methods=['POST'])
 def detect():
     form_values = [x for x in request.form.values()]
@@ -22,7 +27,7 @@ def detect():
     q.enqueue(keyword_detection_processing, url, keywords)
     create_wait_html()
 
-    return render_template('output.html')
+    return render_template('wait.html')
 
 
 if __name__ == '__main__':
