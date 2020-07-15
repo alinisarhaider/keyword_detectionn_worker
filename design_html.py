@@ -8,7 +8,10 @@ def create_wait_html():
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
-    data += "<meta http-equiv='refresh' content='30'></head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
+    data += "<meta http-equiv='refresh' content='30; url = {{ url_for("
+    data += '"processing")}}'
+    data += "'>"
+    data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
 
     html_file.write(data)
     html_file.close()
@@ -21,7 +24,8 @@ def create_error_html():
     data += '"static", filename="./style.css") }}'
     data += "'>"
     data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>This video is restricted by YouTube. Kindly try some other video.</text><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
-    data += '"home")}}">Home</a></div></body></html>'
+    data += '"home")}}'
+    data += "'>Home</a></div></body></html>"
 
     html_file.write(data)
     html_file.close()
