@@ -18,4 +18,4 @@ def keyword_detection_processing(url, keywords):
     detections = get_detections(keywords=keywords, transcription=transcription, timestamps_list=timestamps_list)
     create_output_html(detections=detections)
     print('Output page updated')
-    return
+    return 1
