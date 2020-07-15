@@ -20,6 +20,7 @@ def processing():
     query_id = request.args.get('job_id')
     if query_id:
         found_job = q.fetch_job(query_id)
+        print(query_id, '\n', found_job.result)
         if found_job:
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
             if status == 'completed':
