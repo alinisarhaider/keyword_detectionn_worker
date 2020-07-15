@@ -36,7 +36,9 @@ def create_output_html(detections: dict):
                 d = datetime(1, 1, 1) + timedelta(seconds=math.ceil(i))
                 data += f"<tr><td>{d.minute}:{d.second}</td></tr>"
 
-    data += "</table></center><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
-    data += '"home")}}">Home</a></div></body></html>'
+    data += "</table></center><br><br><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
+    data += '"home")}}'
+    data += "'>"
+    data += 'Home</a></div></body></html>'
     html_file.write(data)
     html_file.close()
