@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, request, url_for, redirect, render_template, render_template_string
 from background_worker import keyword_detection_processing
 import os
 from rq import Queue
@@ -15,11 +15,6 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/teshting')
-def teshting():
-    return render_template('results.html')
-
-
 @app.route('/processing/')
 def processing():
     query_id = request.args.get('job')
@@ -31,10 +26,11 @@ def processing():
                 if found_job.result == 'error':
                     return render_template('error.html')
                 else:
-                    print(found_job.result)
-                    create_results_html(detections=found_job.result)
-                    # q.empty()
-                    return render_template('results.html')
+                    # create_results_html(detections=found_job.result)
+                    # # q.empty()
+                    # return render_template('results.html')
+                    data = create_results_html(detections=found_job.result)
+                    return render_template_string(data)
         else:
             print('No job exists with this id!')
             return render_template('error.html')

@@ -17,7 +17,7 @@ def create_process_html(job_id):
 
 
 def create_results_html(detections: dict):
-    html_file = open('templates/results.html', 'w')
+    # html_file = open('templates/results.html', 'w')
     data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Results</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
@@ -41,5 +41,6 @@ def create_results_html(detections: dict):
     data += "'>"
     # data += "</table></center><br><a style='color: rgba(255, 99, 71, 0.7)' href='https://ytkd42.herokuapp.com/'>"
     data += 'Home</a><br><br></div></body></html>'
-    html_file.write(data)
-    html_file.close()
+    # html_file.write(data)
+    # html_file.close()
+    return data
