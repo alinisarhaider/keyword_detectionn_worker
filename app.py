@@ -15,6 +15,11 @@ def home():
     return render_template('home.html')
 
 
+@app.route('/teshting')
+def teshting():
+    return render_template('results.html')
+
+
 @app.route('/processing/')
 def processing():
     query_id = request.args.get('job')
