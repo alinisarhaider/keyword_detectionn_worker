@@ -13,6 +13,7 @@ def create_wait_html():
     data += "'>"
     data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
 
+
     html_file.write(data)
     html_file.close()
 
