@@ -39,6 +39,6 @@ def create_results_html(detections: dict):
     data += "</table></center><br><br><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
     data += '"home")}}'
     data += "'>"
-    data += 'Home</a></div></body></html>'
+    data += 'Home</a><br></div></body></html>'
     html_file.write(data)
     html_file.close()
