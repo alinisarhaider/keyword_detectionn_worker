@@ -2,12 +2,38 @@ from datetime import datetime, timedelta
 import math
 
 
-def create_html(detections: dict):
+def create_wait_html():
     html_file = open('templates/output.html', 'w')
     data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
+    data += "<meta http-equiv='refresh' content='30'></head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your transaction is being processed...</text></div></body></html>"
+
+    html_file.write(data)
+    html_file.close()
+
+
+def create_error_html():
+    html_file = open('templates/output.html', 'w')
+    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
+    data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
+    data += '"static", filename="./style.css") }}'
+    data += "'>"
+    data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>This video is restricted by YouTube. Kindly try some other video.</text><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
+    data += '"home")}}">Home</a></div></body></html>'
+
+    html_file.write(data)
+    html_file.close()
+
+
+def create_output_html(detections: dict):
+    html_file = open('templates/output.html', 'w')
+    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
+    data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
+    data += '"static", filename="./style.css") }}'
+    data += "'>"
+    data += "<meta http-equiv='refresh' content='30'>"
     data += "</head><body style='overflow:auto'><div><center><table border=1><tr style='text-align:left'><th>Keyword</th><th>Occurrence time in video (Min:Sec)</th></tr>"
 
     for key, value in detections.items():
@@ -22,6 +48,7 @@ def create_html(detections: dict):
                 d = datetime(1, 1, 1) + timedelta(seconds=math.ceil(i))
                 data += f"<tr><td>{d.minute}:{d.second}</td></tr>"
 
-    data += "</table></center></div></body></html>"
+    data += "</table></center><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
+    data += '"home")}}">Home</a></div></body></html>'
     html_file.write(data)
     html_file.close()
