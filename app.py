@@ -24,7 +24,7 @@ def processing():
 def detect():
     form_values = [x for x in request.form.values()]
     url, keywords = form_values[0], form_values[1].split(',')
-    q.enqueue(keyword_detection_processing, url, keywords, result_ttl=0)
+    q.enqueue(keyword_detection_processing, url, keywords, result_ttl=60)
     create_wait_html()
 
     return render_template('wait.html')

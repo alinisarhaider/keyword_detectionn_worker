@@ -13,7 +13,6 @@ def create_wait_html():
     data += "'>"
     data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
 
-
     html_file.write(data)
     html_file.close()
 
@@ -55,4 +54,5 @@ def create_output_html(detections: dict):
     data += "</table></center><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
     data += '"home")}}">Home</a></div></body></html>'
     html_file.write(data)
+    print(data)
     html_file.close()
