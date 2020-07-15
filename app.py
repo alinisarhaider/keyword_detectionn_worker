@@ -23,6 +23,7 @@ def processing():
         found_job = q.fetch_job(query_id)
         if found_job:
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
+            print(found_job.result)
             if status == 'completed':
                 if found_job.result == 'error':
                     return render_template('error.html')
