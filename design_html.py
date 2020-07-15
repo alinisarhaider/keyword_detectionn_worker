@@ -33,7 +33,6 @@ def create_output_html(detections: dict):
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
-    data += "<meta http-equiv='refresh' content='30'>"
     data += "</head><body style='overflow:auto'><div><center><table border=1><tr style='text-align:left'><th>Keyword</th><th>Occurrence time in video (Min:Sec)</th></tr>"
 
     for key, value in detections.items():
