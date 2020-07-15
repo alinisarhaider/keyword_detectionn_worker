@@ -18,7 +18,7 @@ def home():
 @app.route('/processing/')
 def processing():
     print('I am here 1')
-    query_id = request.args.get('job_id')
+    query_id = request.args.get('job')
     print(query_id)
     if query_id:
         found_job = q.fetch_job(query_id)
