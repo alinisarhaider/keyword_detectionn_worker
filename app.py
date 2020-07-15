@@ -27,7 +27,7 @@ def processing():
                     return render_template('error.html')
                 else:
                     create_results_html(detections=found_job.result)
-                    q.empty()
+                    # q.empty()
                     return render_template('results.html')
         else:
             print('No job exists with this id!')
