@@ -2,13 +2,15 @@ from flask import Flask, request, url_for, redirect, render_template
 from background_worker import keyword_detection_processing
 import os
 from rq import Queue
+from rq.registry import StartedJobRegistry
 from worker import conn
 from design_html import create_results_html, create_process_html
 
 
 app = Flask(__name__)
 q = Queue(connection=conn)
-print('Job count:', q.count)
+registry = StartedJobRegistry(queue=q)
+print(registry.get_job_ids())  # This prints out a list of running jobs
 
 
 @app.route('/')
@@ -41,6 +43,7 @@ def detect():
     print('Job count:', q.count)
     job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=41, job_timeout=600)
     print('Job count:', q.count)
+    print(registry.get_job_ids())
     create_process_html(job_id=job.id)
 
     return render_template('wait.html', job_id=job.id)
