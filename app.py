@@ -21,7 +21,6 @@ def processing():
     if query_id:
         found_job = q.fetch_job(query_id)
         if found_job:
-            print(found_job.is_failed)
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
             if status == 'completed':
                 if found_job.result == 'error':
