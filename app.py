@@ -8,7 +8,7 @@ from design_html import create_results_html, create_process_html
 
 app = Flask(__name__)
 q = Queue(connection=conn)
-print(q.count)
+print('Job count:', q.count)
 
 
 @app.route('/')
@@ -36,6 +36,7 @@ def processing():
 def detect():
     form_values = [x for x in request.form.values()]
     url, keywords = form_values[0], form_values[1].split(',')
+    print('Job count:', q.count)
     job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=5, job_timeout=600)
     create_process_html(job_id=job.id)
 
