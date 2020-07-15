@@ -15,7 +15,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/processing')
+@app.route('/processing/')
 def processing():
     query_id = request.args.get('job_id')
     if query_id:
