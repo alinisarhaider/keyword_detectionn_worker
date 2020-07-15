@@ -2,15 +2,13 @@ from flask import Flask, request, url_for, redirect, render_template
 from background_worker import keyword_detection_processing
 import os
 from rq import Queue
-from rq.registry import StartedJobRegistry
 from worker import conn
 from design_html import create_results_html, create_process_html
 
 
 app = Flask(__name__)
 q = Queue(connection=conn)
-registry = StartedJobRegistry(queue=q)
-print(registry.get_job_ids())  # This prints out a list of running jobs
+print(q.count)
 
 
 @app.route('/')
@@ -20,13 +18,11 @@ def home():
 
 @app.route('/processing/')
 def processing():
-    print('Job count_:', q.count)
     query_id = request.args.get('job')
     if query_id:
         found_job = q.fetch_job(query_id)
         if found_job:
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
-            print(found_job.result)
             if status == 'completed':
                 if found_job.result == 'error':
                     return render_template('error.html')
@@ -40,10 +36,7 @@ def processing():
 def detect():
     form_values = [x for x in request.form.values()]
     url, keywords = form_values[0], form_values[1].split(',')
-    print('Job count:', q.count)
-    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=41, job_timeout=600)
-    print('Job count:', q.count)
-    print(registry.get_job_ids())
+    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=47, job_timeout=600, id=23)
     create_process_html(job_id=job.id)
 
     return render_template('wait.html', job_id=job.id)
