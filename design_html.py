@@ -9,7 +9,7 @@ def create_process_html(job_id):
     data += '"static", filename="./style.css") }}'
     data += "'>"
     data += "<meta http-equiv='refresh' content='30; url = https://ytkd42.herokuapp.com/processing/?job="
-    data += str(job_id)+">"
+    data += str(job_id)+"'>"
     data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>Kindly wait while your request is being processed...</text></div></body></html>"
 
     html_file.write(data)
