@@ -36,10 +36,10 @@ def create_results_html(detections: dict):
                 d = datetime(1, 1, 1) + timedelta(seconds=math.ceil(i))
                 data += f"<tr><td>{d.minute}:{d.second}</td></tr>"
 
-    # data += "</table></center><br><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
-    # data += '"home")}}'
-    # data += "'>"
-    data += "</table></center><br><a style='color: rgba(255, 99, 71, 0.7)' href='https://ytkd42.herokuapp.com/'>"
+    data += "</table></center><br><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
+    data += '"home")}}'
+    data += "'>"
+    # data += "</table></center><br><a style='color: rgba(255, 99, 71, 0.7)' href='https://ytkd42.herokuapp.com/'>"
     data += 'Home</a><br><br></div></body></html>'
     html_file.write(data)
     html_file.close()
