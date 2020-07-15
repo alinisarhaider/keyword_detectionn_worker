@@ -32,15 +32,15 @@ def processing():
         else:
             print('No job exists with this id!')
             return render_template('error.html')
-    return render_template('process.html')
+    return render_template('process.html', job_id=query_id)
 
 
 @app.route('/detect', methods=['POST'])
 def detect():
     form_values = [x for x in request.form.values()]
     url, keywords = form_values[0], form_values[1].split(',')
-    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=27, job_timeout=600, job_id='42')
-    create_process_html(job_id=job.id)
+    job = q.enqueue(keyword_detection_processing, url, keywords, result_ttl=27, job_timeout=600)
+    # create_process_html(job_id=job.id)
 
     return render_template('wait.html', job_id=job.id)
 
