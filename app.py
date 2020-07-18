@@ -30,7 +30,7 @@ def processing():
                     return render_template_string(data)
         else:
             print('No job exists with this id!')
-            return render_template('error.html')
+            return render_template('error2.html')
     return render_template('process.html', job_id=query_id)
 
 
