@@ -46,7 +46,7 @@ def get_audio_stream(video_url: str):
     try:
         youtube = MyYouTube(video_url)
     except:
-        return 'Access to this video is restricted by YouTube. Kindly try some other video.'
+        return 'Access to this video is restricted by YouTube. Please try some other video.'
 
     video_length = int(youtube.player_config_args['player_response']['videoDetails']['lengthSeconds'])
     if video_length > 1260:
