@@ -4,7 +4,7 @@ import os
 from rq import Queue
 from rq.job import Job
 from worker import conn
-from design_html import create_results_html
+from design_html import create_results_html, create_error_html
 
 
 app = Flask(__name__)
@@ -22,20 +22,21 @@ def processing():
     if query_id:
         found_job = q.fetch_job(query_id)
         if found_job:
-            print('tada!', found_job.is_failed)
-            job = Job.fetch(query_id, connection=conn)
-            status_ = job.get_status()
-            print(status_)
+            # print('tada!', found_job.is_failed)
+            # job = Job.fetch(query_id, connection=conn)
+            # status_ = job.get_status()
+            # print(status_)
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
             if status == 'completed':
-                if found_job.result == 'error':
-                    return render_template('error.html')
+                if type(found_job.result) == str:
+                    error_data = create_error_html(found_job.result)
+                    return render_template_string(error_data)
                 else:
                     data = create_results_html(detections=found_job.result)
                     return render_template_string(data)
         else:
-            print('No job exists with this id!')
-            return render_template('error2.html')
+            error_data = create_error_html('Process failed because of limited server memory. Please try again.')
+            return render_template_string(error_data)
     return render_template('process.html', job_id=query_id)
 
 

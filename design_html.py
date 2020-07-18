@@ -26,3 +26,16 @@ def create_results_html(detections: dict):
     data += "'>"
     data += 'Home</a><br><br></div></body></html>'
     return data
+
+
+def create_error_html(error_statement):
+    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
+    data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
+    data += '"static", filename="./style.css") }}'
+    data += "'>"
+    data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>"
+    data += f'{error_statement}'
+    data += "</text><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
+    data += '"home")}}'
+    data += "'>Home</a></div></body></html>"
+    return data
