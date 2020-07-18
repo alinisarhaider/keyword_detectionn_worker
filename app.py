@@ -23,7 +23,7 @@ def processing():
         found_job = q.fetch_job(query_id)
         if found_job:
             print('tada!', found_job.is_failed)
-            job = Job.fetch(id, connection=conn)
+            job = Job.fetch(query_id, connection=conn)
             status_ = job.get_status()
             print(status_)
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
