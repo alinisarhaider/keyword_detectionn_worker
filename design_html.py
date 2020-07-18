@@ -35,7 +35,7 @@ def create_error_html(error_statement):
     data += "'>"
     data += "</head><body><div  class='waiting_screen'><text style='font-size:23px'>"
     data += f'{error_statement}'
-    data += "</text><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
+    data += "</text><br><br><a style='color: rgba(255, 99, 71, 0.7)' href='{{ url_for("
     data += '"home")}}'
     data += "'>Home</a></div></body></html>"
     return data
