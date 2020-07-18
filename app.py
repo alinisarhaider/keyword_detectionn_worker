@@ -2,6 +2,7 @@ from flask import Flask, request, url_for, redirect, render_template, render_tem
 from background_worker import keyword_detection_processing
 import os
 from rq import Queue
+from rq.job import Job
 from worker import conn
 from design_html import create_results_html
 
@@ -21,6 +22,10 @@ def processing():
     if query_id:
         found_job = q.fetch_job(query_id)
         if found_job:
+            print('tada!', found_job.is_failed)
+            job = Job.fetch(id, connection=conn)
+            status_ = job.get_status()
+            print(status_)
             status = 'failed' if found_job.is_failed else 'pending' if found_job.result is None else 'completed'
             if status == 'completed':
                 if found_job.result == 'error':
