@@ -29,7 +29,7 @@ def create_results_html(detections: dict):
 
 
 def create_error_html(error_statement):
-    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Detect Keywords</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
+    data = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Error</title><link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'><link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>"
     data += "<link type='text/css' rel='stylesheet' href='{{ url_for("
     data += '"static", filename="./style.css") }}'
     data += "'>"
